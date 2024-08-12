@@ -1,10 +1,16 @@
 import { configureStore } from "@reduxjs/toolkit";
 import carshopSlice from "./features/carshop/carshopSlice";
+// import logger from "redux-logger";
 
 export default function makeStore() {
   return configureStore({
     reducer: {
-      carshop: carshopSlice
+      carshop: carshopSlice,
+    },
+    middleware: (getDefaultMiddleware) => {
+     return getDefaultMiddleware({
+        serializableCheck: false,
+      }) //.concat(logger);
     },
   });
 }

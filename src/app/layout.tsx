@@ -25,9 +25,9 @@ export default function RootLayout({ children }: Props) {
     <StoreProvider>
       <html lang="en">
         <body className={inter.className} suppressHydrationWarning={true}>
-          <section className="w-full h-full flex flex-col items-center">
+          <section className="w-full bg-bgBaseColor h-full flex flex-col items-center">
             <Header />
-            <section className=" w-4/5 h-full flex justify-center mt-20 mb-16">
+            <section className="w-4/5 h-full flex justify-center mt-20 mb-16">
               {children}
             </section>
             <Footer />

@@ -1,10 +1,11 @@
 "use client";
-import { getCars } from "@/lib/features/carshop/carshopAPI";
+import { getRecommendCars } from "@/lib/features/carshop/carshopAPI";
 import { selectRecommendCars } from "@/lib/features/carshop/carshopSlice";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { useEffect, useState } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useInView } from "react-intersection-observer";
+import CarCard from "./carCard/carCard";
 
 function Recommendations() {
   const recommendCars = useAppSelector(selectRecommendCars);
@@ -12,36 +13,44 @@ function Recommendations() {
   const { entities, loading } = recommendCars;
   const [limit, setLimit] = useState<number>(20);
   const { ref, inView } = useInView({
-    threshold: 1.0,
+    threshold: 0.8,
   });
 
   useEffect(() => {
-    setLimit((prev) => prev + 20);
-    dispatch(getCars(limit));
+    dispatch(getRecommendCars(limit));
+  },[]);
+
+  useEffect(() => {
+    if (inView) {
+      setLimit((prev) => prev + 20);
+    }
   }, [inView]);
 
+  useEffect(() => {
+    dispatch(getRecommendCars(limit));
+  }, [limit]);
+
   return (
-    <section className=" w-full h-auto mt-7">
-      <p className="text-3xl font-semibold border-b border-b-black">
+    <section className=" w-full h-auto mt-16">
+      <p className="text-3xl text-txtBaseColor font-semibold border-b border-b-black dark:border-b-gray-300">
         Recommendations
       </p>
-      <div className="w-full h-auto mt-6 grid grid-cols-4 gap-5">
+      <div className="w-full h-auto mt-6 flex flex-wrap gap-y-5 justify-between">
         {entities?.map((car, index) => {
-          if (index === entities.length - 1) {
-            return (
-              <div className="w-64 h-96 bg-slate-400" key={car.id} ref={ref}>
-                {car.body_type}
-              </div>
-            );
-          }
           return (
-            <div className="w-72 h-96 bg-slate-400" key={car.id}>
-              {car.body_type}
-            </div>
+            <CarCard
+              key={car.id}
+              car={car}
+              ref={index === entities.length - 1 ? ref : null}
+            />
           );
         })}
-        {loading && <CircularProgress />}
       </div>
+      {loading && (
+        <div className="w-full h-4 flex justify-center items-center mt-4">
+          <CircularProgress />
+        </div>
+      )}
     </section>
   );
 }

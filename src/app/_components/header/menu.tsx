@@ -14,14 +14,14 @@ import TelegramIcon from "@mui/icons-material/Telegram";
 
 function Menu({ isLogined }: { isLogined: boolean }) {
   return (
-    <div>
+    <div className="w-full h-full bg-bgBaseColor" >
       {isLogined === true ? (
         <Link
           href="/login"
-          className=" w-full h-20 flex items-center pl-4 cursor-pointer bg-gray-100 hover:opacity-50"
+          className=" w-full h-20 flex items-center pl-4 cursor-pointer bg-bgBaseColor hover:opacity-50"
         >
           <AccountBoxIcon sx={{ fontSize: "64px" }} color="primary" />
-          <p className=" text-3xl">Sign In</p>
+          <p className=" text-3xl text-txtBaseColor">Sign In</p>
         </Link>
       ) : (
         <></>
@@ -29,26 +29,26 @@ function Menu({ isLogined }: { isLogined: boolean }) {
       <div className="mt-2 w-full h-72 flex flex-col">
         <Link href="/dealers" className="menu-item">
           <DirectionsCarFilledIcon fontSize="large" color="primary" />
-          <p className=" text-base ml-2">Dealers</p>
+          <p className=" text-base text-txtBaseColor ml-2">Dealers</p>
         </Link>
         <Link href="/advertisement" className="menu-item">
           <AddModeratorIcon fontSize="large" color="primary" />
-          <p className=" text-base ml-2">Advertisement</p>
+          <p className=" text-base text-txtBaseColor ml-2">Advertisement</p>
         </Link>
         <Link href="/rules" className="menu-item">
           <GavelIcon fontSize="large" color="primary" />
-          <p className=" text-base ml-2">Terms of Use</p>
+          <p className=" text-base text-txtBaseColor ml-2">Terms of Use</p>
         </Link>
         <Link href="/help" className="menu-item">
           <HelpCenterIcon fontSize="large" color="primary" />
-          <p className=" text-base ml-2">Help</p>
+          <p className=" text-base text-txtBaseColor ml-2">Help</p>
         </Link>
         <Link href="/contact" className="menu-item">
           <ContactPhoneIcon fontSize="large" color="primary" />
-          <p className=" text-base ml-2">Contact</p>
+          <p className=" text-base text-txtBaseColor ml-2">Contact</p>
         </Link>
       </div>
-      <div className="w-full h-12 flex pl-4 mt-10 border-b border-b-gray-200">
+      <div className="w-full h-12 flex pl-4 mt-10 gap-x-1 border-b border-b-gray-200">
         <Link href="https://www.facebook.com" target="_blank">
           <FacebookIcon
             fontSize="large"
@@ -86,7 +86,7 @@ function Menu({ isLogined }: { isLogined: boolean }) {
         </Link>
       </div>
       <div className="w-full h-8 mt-6 pl-4 text-xs border-b border-b-gray-200 mr-11">
-        <p>©2024 CarShop | All Rights Reserved</p>
+        <p className="text-txtBaseColor" >©2024 CarShop | All Rights Reserved</p>
       </div>
     </div>
   );

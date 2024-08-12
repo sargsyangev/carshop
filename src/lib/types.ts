@@ -12,7 +12,7 @@ export type car = {
   price: number;
   mileage: number;
   color: string;
-  engine_volume: string;
+  engineVolume: string;
   body_type: string;
   transmission: string;
   engine: string;
